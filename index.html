@@ -555,7 +555,7 @@ class Component extends DCLogic {
         galerija: this.revealStyle('galerija', { maxWidth: 1180, margin: '0 auto', padding: `${isMobile ? 64 : 96}px 24px` }),
         testovi: this.revealStyle('testovi', { background: 'linear-gradient(120deg, #7a1512, #d6291f)', color: '#fff' }),
         kontakt: this.revealStyle('kontakt', { maxWidth: 1180, margin: '0 auto', padding: `${isMobile ? 64 : 96}px 24px`, display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 48, alignItems: 'flex-start' }),
-        vozila: this.revealStyle('vozila', { maxWidth: 1180, margin: '0 auto', padding: `${isMobile ? 64 : 96}px 24px` })
+        vozila: { maxWidth: 1180, margin: '0 auto', padding: `${isMobile ? 64 : 96}px 24px`, opacity: 1 }
       },
       vehicleGridCols: isMobile ? '1fr' : 'repeat(3,1fr)',
       vehicles: this.vehicles.map((v) => ({ ...v, noSrc: !v.src })),
