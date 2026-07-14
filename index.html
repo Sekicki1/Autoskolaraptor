@@ -479,8 +479,14 @@ class Component extends DCLogic {
             this.observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
       els.forEach((el) => this.observer.observe(el));
+      this.revealFallback = setTimeout(() => {
+        const allKeys = {};
+        els.forEach((el) => { allKeys[el.getAttribute('data-reveal')] = true; });
+        this.setState((s) => ({ revealed: { ...allKeys, ...s.revealed } }));
+        if (!this.state.counters || this.state.counters.godine === 0) this.startCounters();
+      }, 2500);
     }
   }
 
@@ -488,6 +494,7 @@ class Component extends DCLogic {
     window.removeEventListener('resize', this.onResize);
     if (this.heroTimer) clearInterval(this.heroTimer);
     if (this.heroBgTimer) clearInterval(this.heroBgTimer);
+    if (this.revealFallback) clearTimeout(this.revealFallback);
     if (this.observer) this.observer.disconnect();
     if (this.counterRaf) cancelAnimationFrame(this.counterRaf);
   }
